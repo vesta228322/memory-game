@@ -2,4 +2,102 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #241f1c;
+}
+
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 65px;
+    margin-bottom: 40px;
+}
+
+.app-title {
+    color: #fff;
+    font-size: 32px;
+}
+
+.buttons-container {
+    display: flex;
+    gap: 20px;
+}
+
+.header-btn {
+    background-color: #c98757;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.header-btn:hover {
+    background-color: #a0522d;
+}
+
+.game-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.game-container {
+    max-width: 500px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-card {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    background-color: #c98757;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s linear;
+
+    i {
+        font-size: 40px;
+        display: none;
+    }
+
+    i+i {
+        display: block;
+    }
+
+    &.flip {
+        background-color: #1b76c0;
+        transform: perspective(100px) rotateY(180deg);
+
+        i {
+            display: block;
+        }
+
+        i+i {
+            display: none;
+        }
+    }
+
+    &.success {
+        background-color: #4CAF50;
+        cursor: default;
+    }
 }
