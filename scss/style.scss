@@ -49,9 +49,11 @@ body {
 
 .game-section {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 80vh;
+    gap: 20px;
 }
 
 .game-container {
@@ -99,5 +101,18 @@ body {
     &.success {
         background-color: #4CAF50;
         cursor: default;
+    }
+}
+
+.counter {
+    color: #e0d5c8;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+
+    &-container {
+        display: flex;
+        gap: 220px;
     }
 }

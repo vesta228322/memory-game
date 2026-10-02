@@ -1,5 +1,7 @@
 export const gameState = {
     firstCard: null,
     secondCard: null,
-    clickable: true
+    clickable: true,
+    move: 0,
+    foundPairs: 0
 }

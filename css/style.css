@@ -60,6 +60,10 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -67,6 +71,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
   min-height: 80vh;
+  gap: 20px;
 }
 
 .game-container {
@@ -124,4 +129,18 @@ body {
 .game-card.success {
   background-color: #4CAF50;
   cursor: default;
+}
+
+.counter {
+  color: #e0d5c8;
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 24px;
+  letter-spacing: 0.5px;
+}
+.counter-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 220px;
 }/*# sourceMappingURL=style.css.map */

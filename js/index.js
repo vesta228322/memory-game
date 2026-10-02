@@ -25,12 +25,14 @@ const createApp = () => {
     header.append(buttonsContainer);
 
     const buttons = buttonsData.map(btn => {
+
         const button = document.createElement('button');
         button.textContent = btn.text;
         button.classList.add(...btn.className.split(' '));
         buttonsContainer.append(button);
         return button;
     });
+
 
     const main = document.createElement('main');
     main.classList.add('main');
@@ -39,6 +41,30 @@ const createApp = () => {
     const section = document.createElement('section');
     section.classList.add('game-section');
     main.append(section);
+
+    const counters = document.createElement('div');
+    counters.classList.add('counter-container');
+    section.append(counters);
+
+    const counterData = [
+        {className: 'counter counter-move', text: 'Ходы' },
+        {className: 'counter counter-found-pairs', text: 'Найденые пары' }
+    ]
+
+    counterData.forEach(data => {
+        const counter = document.createElement('span');
+        counter.classList.add(...data.className.split(' '));
+        counter.dataset.label = data.text;
+        counters.append(counter);
+    });
+    
+    function updateCounter() {
+        const counterMove = document.querySelector('.counter-move');
+        const counterPairs = document.querySelector('.counter-found-pairs');
+        counterMove.textContent = `${counterMove.dataset.label}: ${gameState.move}`;
+        counterPairs.textContent = `${counterPairs.dataset.label}: ${gameState.foundPairs}`;
+    }
+    updateCounter();
 
     const gameContainer = document.createElement('div');
     gameContainer.classList.add('game-container');
@@ -62,6 +88,8 @@ const createApp = () => {
                 } else if (i !== gameState.firstCard) {
                     gameState.secondCard = i;
                     gameState.clickable = false;
+                    gameState.move += 1;
+                    updateCounter();
                 }
 
                 if (gameState.firstCard !== null && gameState.secondCard !== null && gameState.firstCard !== gameState.secondCard) {
@@ -69,6 +97,8 @@ const createApp = () => {
                         setTimeout(() => {
                             cards[gameState.firstCard].classList.add('success');
                             cards[gameState.secondCard].classList.add('success');
+                            gameState.foundPairs += 1;
+                            updateCounter();
 
                             gameState.firstCard = null;
                             gameState.secondCard = null;
