@@ -1,4 +1,5 @@
 import { createCards, createCardElement } from './createCards.js';
+import { createModal } from './createModal.js';
 import { gameState } from './gameState.js';
 
 const createApp = () => {
@@ -47,8 +48,8 @@ const createApp = () => {
     section.append(counters);
 
     const counterData = [
-        {className: 'counter counter-move', text: 'Ходы' },
-        {className: 'counter counter-found-pairs', text: 'Найденые пары' }
+        { className: 'counter counter-move', text: 'Ходы' },
+        { className: 'counter counter-found-pairs', text: 'Найденые пары' }
     ]
 
     counterData.forEach(data => {
@@ -57,7 +58,7 @@ const createApp = () => {
         counter.dataset.label = data.text;
         counters.append(counter);
     });
-    
+
     function updateCounter() {
         const counterMove = document.querySelector('.counter-move');
         const counterPairs = document.querySelector('.counter-found-pairs');
@@ -103,6 +104,12 @@ const createApp = () => {
                             gameState.firstCard = null;
                             gameState.secondCard = null;
                             gameState.clickable = true;
+
+                            if (gameState.foundPairs === 8) {
+                                modal.setContent(createWinContent(gameState.move, () => {}));
+                                modal.openModal();
+                                gameState.clickable = false;
+                            }
                         }, 300);
                     } else {
                         setTimeout(() => {
@@ -117,5 +124,24 @@ const createApp = () => {
             }
         });
     });
+
+    const modal = createModal();
+
+    function createWinContent(moves, onNewGame) {
+        const container = document.createElement('div');
+        const h2 = document.createElement('h2');
+        const p = document.createElement('p');
+        const newGameBtn = document.createElement('button');
+        newGameBtn.classList.add('modal-btn');
+        newGameBtn.textContent = 'Новая игра';
+        newGameBtn.addEventListener('click', onNewGame);
+        h2.textContent = 'Ты большой(ая) молодец!';
+        p.textContent = `Это невероятно, что ты прошёл(ла) игру за ${moves} ходов`;
+
+        container.append(h2, p, newGameBtn);
+
+
+        return container;
+    }
 };
 createApp();

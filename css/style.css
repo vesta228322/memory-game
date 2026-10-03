@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -143,4 +144,93 @@ body {
   display: -ms-flexbox;
   display: flex;
   gap: 220px;
+}
+
+.modal-overflow {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 100;
+  opacity: 0;
+  -webkit-transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease;
+}
+.modal-overflow.active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  opacity: 1;
+}
+.modal-content {
+  position: relative;
+  background: #f5ede3;
+  padding: 40px 30px 30px;
+  border-radius: 12px;
+  min-width: 320px;
+  max-width: 90vw;
+  text-align: center;
+  -webkit-transform: scale(0.9) translateY(10px);
+          transform: scale(0.9) translateY(10px);
+  -webkit-transition: -webkit-transform 0.25s ease;
+  transition: -webkit-transform 0.25s ease;
+  transition: transform 0.25s ease;
+  transition: transform 0.25s ease, -webkit-transform 0.25s ease;
+}
+.active .modal-content {
+  -webkit-transform: scale(1) translateY(0);
+          transform: scale(1) translateY(0);
+}
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  font-size: 40px;
+  line-height: 1;
+  cursor: pointer;
+  color: #5a4a3a;
+}
+.modal-close::before {
+  content: "×";
+}
+.modal-close:hover {
+  color: #000;
+}
+.modal-body div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 12px;
+}
+.modal-body h2 {
+  font-size: 28px;
+}
+.modal-body p {
+  font-size: 18px;
+}
+.modal-btn {
+  padding: 10px 15px;
+  background: gold;
+  font-size: 20px;
+  border: none;
+  border-radius: 12px;
+  -webkit-box-shadow: 12px 10px 22px 1px rgba(0, 0, 0, 0.36);
+          box-shadow: 12px 10px 22px 1px rgba(0, 0, 0, 0.36);
 }/*# sourceMappingURL=style.css.map */
