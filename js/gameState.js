@@ -3,5 +3,6 @@ export const gameState = {
     secondCard: null,
     clickable: true,
     move: 0,
-    foundPairs: 0
+    foundPairs: 0,
+    timerId: null
 }

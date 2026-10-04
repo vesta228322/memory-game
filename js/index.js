@@ -34,7 +34,6 @@ const createApp = () => {
         return button;
     });
 
-
     const main = document.createElement('main');
     main.classList.add('main');
     container.append(main);
@@ -71,60 +70,87 @@ const createApp = () => {
     gameContainer.classList.add('game-container');
     section.append(gameContainer);
 
-    const shuffledCards = createCards();
+    const renderCards = () => {
+        gameContainer.replaceChildren();
 
-    shuffledCards.forEach(icon => gameContainer.append(createCardElement('question-circle', icon)));
+        const shuffledCards = createCards();
 
-    const cards = document.querySelectorAll('.game-card');
+        shuffledCards.forEach(icon => gameContainer.append(createCardElement('question-circle', icon)));
 
-    cards.forEach((card, i) => {
+        const cards = gameContainer.querySelectorAll('.game-card');
 
+        cards.forEach((card, i) => {
 
-        card.addEventListener('click', () => {
-            if (gameState.clickable === true && !card.classList.contains('success')) {
-                card.classList.add('flip');
+            card.addEventListener('click', () => {
+                if (gameState.clickable === true && !card.classList.contains('success')) {
+                    card.classList.add('flip');
 
-                if (gameState.firstCard === null) {
-                    gameState.firstCard = i;
-                } else if (i !== gameState.firstCard) {
-                    gameState.secondCard = i;
-                    gameState.clickable = false;
-                    gameState.move += 1;
-                    updateCounter();
-                }
+                    if (gameState.firstCard === null) {
+                        gameState.firstCard = i;
+                    } else if (i !== gameState.firstCard) {
+                        gameState.secondCard = i;
+                        gameState.clickable = false;
+                        gameState.move += 1;
+                        updateCounter();
+                    }
 
-                if (gameState.firstCard !== null && gameState.secondCard !== null && gameState.firstCard !== gameState.secondCard) {
-                    if (cards[gameState.firstCard].firstElementChild.className === cards[gameState.secondCard].firstElementChild.className) {
-                        setTimeout(() => {
-                            cards[gameState.firstCard].classList.add('success');
-                            cards[gameState.secondCard].classList.add('success');
-                            gameState.foundPairs += 1;
-                            updateCounter();
+                    if (gameState.firstCard !== null && gameState.secondCard !== null && gameState.firstCard !== gameState.secondCard) {
+                        if (cards[gameState.firstCard].firstElementChild.className === cards[gameState.secondCard].firstElementChild.className) {
+                            gameState.timerId = setTimeout(() => {
+                                cards[gameState.firstCard].classList.add('success');
+                                cards[gameState.secondCard].classList.add('success');
+                                gameState.foundPairs += 1;
+                                updateCounter();
 
-                            gameState.firstCard = null;
-                            gameState.secondCard = null;
-                            gameState.clickable = true;
+                                gameState.firstCard = null;
+                                gameState.secondCard = null;
+                                gameState.clickable = true;
 
-                            if (gameState.foundPairs === 8) {
-                                modal.setContent(createWinContent(gameState.move, () => {}));
-                                modal.openModal();
-                                gameState.clickable = false;
-                            }
-                        }, 300);
-                    } else {
-                        setTimeout(() => {
-                            cards[gameState.firstCard].classList.remove('flip');
-                            cards[gameState.secondCard].classList.remove('flip');
-                            gameState.firstCard = null;
-                            gameState.secondCard = null;
-                            gameState.clickable = true;
-                        }, 700);
+                                if (gameState.foundPairs === 8) {
+                                    modal.setContent(createWinContent(gameState.move, restartGame));
+                                    modal.openModal();
+                                    gameState.clickable = false;
+                                }
+
+                                gameState.timerId = null;
+                            }, 300);
+                        } else {
+                            gameState.timerId = setTimeout(() => {
+                                cards[gameState.firstCard].classList.remove('flip');
+                                cards[gameState.secondCard].classList.remove('flip');
+                                gameState.firstCard = null;
+                                gameState.secondCard = null;
+                                gameState.clickable = true;
+                                gameState.timerId = null;
+                            }, 700);
+                        }
                     }
                 }
-            }
+            });
         });
-    });
+    };
 
+    renderCards();
+
+    const restartGame = () => {
+        if (gameState.timerId) {
+            clearTimeout(gameState.timerId);
+            gameState.timerId = null;
+        }
+
+        gameState.move = 0;
+        gameState.foundPairs = 0;
+        gameState.firstCard = null;
+        gameState.secondCard = null;
+        gameState.clickable = true;
+
+        renderCards();
+        updateCounter();
+        modal.closeModal();
+    };
+
+    buttons[0].addEventListener('click', restartGame);
+    
     const modal = createModal();
 
     function createWinContent(moves, onNewGame) {
@@ -144,4 +170,5 @@ const createApp = () => {
         return container;
     }
 };
+
 createApp();
