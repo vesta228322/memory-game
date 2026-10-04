@@ -150,7 +150,9 @@ body {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
-  display: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -159,14 +161,15 @@ body {
           align-items: center;
   z-index: 100;
   opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
   -webkit-transition: opacity 0.25s ease;
   transition: opacity 0.25s ease;
 }
 .modal-overflow.active {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 .modal-content {
   position: relative;
@@ -233,4 +236,5 @@ body {
   border-radius: 12px;
   -webkit-box-shadow: 12px 10px 22px 1px rgba(0, 0, 0, 0.36);
           box-shadow: 12px 10px 22px 1px rgba(0, 0, 0, 0.36);
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */
