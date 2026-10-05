@@ -1,0 +1,288 @@
+@charset "UTF-8";
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #241f1c;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 65px;
+  margin-bottom: 40px;
+}
+
+.app-title {
+  color: #fff;
+  font-size: 32px;
+}
+
+.buttons-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 20px;
+}
+
+.header-btn {
+  background-color: #c98757;
+  color: #000000;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  -webkit-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+}
+
+.header-btn:hover {
+  background-color: #a0522d;
+}
+
+.game-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 80vh;
+  gap: 20px;
+}
+
+.game-container {
+  max-width: 500px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.game-card {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  background-color: #c98757;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.game-card i {
+  font-size: 40px;
+  display: none;
+}
+.game-card i + i {
+  display: block;
+}
+.game-card.flip {
+  background-color: #1b76c0;
+  -webkit-transform: perspective(100px) rotateY(180deg);
+          transform: perspective(100px) rotateY(180deg);
+}
+.game-card.flip i {
+  display: block;
+}
+.game-card.flip i + i {
+  display: none;
+}
+.game-card.success {
+  background-color: #4CAF50;
+  cursor: default;
+}
+
+.counter {
+  color: #e0d5c8;
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 24px;
+  letter-spacing: 0.5px;
+}
+.counter-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 220px;
+}
+
+.modal-overflow {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  -webkit-transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease;
+}
+.modal-overflow.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.modal-content {
+  position: relative;
+  background: #f5ede3;
+  padding: 40px 30px 30px;
+  border-radius: 12px;
+  min-width: 320px;
+  max-width: 90vw;
+  text-align: center;
+  -webkit-transform: scale(0.9) translateY(10px);
+          transform: scale(0.9) translateY(10px);
+  -webkit-transition: -webkit-transform 0.25s ease;
+  transition: -webkit-transform 0.25s ease;
+  transition: transform 0.25s ease;
+  transition: transform 0.25s ease, -webkit-transform 0.25s ease;
+}
+.active .modal-content {
+  -webkit-transform: scale(1) translateY(0);
+          transform: scale(1) translateY(0);
+}
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  font-size: 40px;
+  line-height: 1;
+  cursor: pointer;
+  color: #5a4a3a;
+}
+.modal-close::before {
+  content: "×";
+}
+.modal-close:hover {
+  color: #000;
+}
+.modal-body div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 12px;
+}
+.modal-body h2 {
+  font-size: 28px;
+}
+.modal-body p {
+  font-size: 18px;
+}
+.modal-btn {
+  padding: 10px 15px;
+  background: gold;
+  font-size: 20px;
+  border: none;
+  border-radius: 12px;
+  -webkit-box-shadow: 12px 10px 22px 1px rgba(0, 0, 0, 0.36);
+          box-shadow: 12px 10px 22px 1px rgba(0, 0, 0, 0.36);
+  cursor: pointer;
+}
+
+.rating-table {
+  width: 100%;
+  min-width: 340px;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 20px auto 0;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: #fffaf5;
+  -webkit-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+.rating-table th,
+.rating-table td {
+  padding: 12px 20px;
+  text-align: center;
+}
+.rating-table th {
+  background-color: #c98757;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+}
+.rating-table td {
+  color: #3b3028;
+  font-size: 17px;
+}
+.rating-table tbody tr {
+  -webkit-transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease;
+}
+.rating-table tbody tr:hover {
+  background-color: #f3e4d6;
+}
+.rating-table tbody tr + tr td {
+  border-top: 1px solid #eadfd5;
+}
+.rating-table td:first-child {
+  width: 70px;
+  font-weight: 700;
+}
+.rating-table td:nth-child(2) {
+  font-weight: 600;
+}
+.rating-table td:last-child {
+  color: #7a6a5c;
+}/*# sourceMappingURL=style.css.map */
