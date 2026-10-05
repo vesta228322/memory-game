@@ -13,7 +13,7 @@ const createApp = () => {
     container.append(header);
 
     const h1 = document.createElement('h1');
-    h1.textContent = 'Найди пару';
+    h1.textContent = 'Memory Game';
     h1.classList.add('app-title');
     header.append(h1);
 
@@ -203,6 +203,20 @@ const createApp = () => {
         const table = document.createElement('table');
         table.classList.add('rating-table');
 
+        const thead = document.createElement('thead');
+        const headerRow = document.createElement('tr');
+
+        ['Место', 'Ходы', 'Дата'].forEach(text => {
+            const th = document.createElement('th');
+            th.textContent = text;
+            headerRow.append(th);
+        });
+
+        thead.append(headerRow);
+        table.append(thead);
+
+        const tbody = document.createElement('tbody')
+
         results.forEach((result, index) => {
             const row = document.createElement('tr');
 
@@ -216,10 +230,12 @@ const createApp = () => {
             dateCell.textContent = formatDate(result.date);
 
             row.append(placeCell, movesCell, dateCell);
-            table.append(row);
+            tbody.append(row);
         });
 
+        table.append(tbody);
         container.append(title, table);
+
         return container;
     }
 

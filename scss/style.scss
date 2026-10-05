@@ -209,7 +209,7 @@ body {
 
 .rating-table {
     width: 100%;
-    min-width: 320px;
+    min-width: 340px;
     border-collapse: separate;
     border-spacing: 0;
     margin: 20px auto 0;
@@ -218,37 +218,38 @@ body {
     background-color: #fffaf5;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 
+    th,
     td {
         padding: 12px 20px;
-        font-size: 17px;
         text-align: center;
-        color: #3b3028;
     }
 
-    tr {
+    th {
+        background-color: #c98757;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    td {
+        color: #3b3028;
+        font-size: 17px;
+    }
+
+    tbody tr {
         transition: background-color 0.2s ease;
 
         &:hover {
             background-color: #f3e4d6;
         }
 
-        &:first-child {
-            background-color: #c98757;
-            color: #fff;
-
-            td {
-                color: #fff;
-                font-weight: 600;
-            }
-        }
-
-        &+tr td {
+        & + tr td {
             border-top: 1px solid #eadfd5;
         }
     }
 
     td:first-child {
-        width: 60px;
+        width: 70px;
         font-weight: 700;
     }
 
