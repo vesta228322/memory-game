@@ -1,6 +1,7 @@
 import { createCards, createCardElement } from './createCards.js';
 import { createModal } from './createModal.js';
 import { gameState } from './gameState.js';
+import { getResults, saveResult } from './leaderboard.js';
 
 const createApp = () => {
     const container = document.createElement('div');
@@ -62,7 +63,7 @@ const createApp = () => {
         const counterMove = document.querySelector('.counter-move');
         const counterPairs = document.querySelector('.counter-found-pairs');
         counterMove.textContent = `${counterMove.dataset.label}: ${gameState.move}`;
-        counterPairs.textContent = `${counterPairs.dataset.label}: ${gameState.foundPairs}`;
+        counterPairs.textContent = `${counterPairs.dataset.label}: ${gameState.foundPairs} / 8`;
     }
     updateCounter();
 
@@ -107,7 +108,11 @@ const createApp = () => {
                                 gameState.clickable = true;
 
                                 if (gameState.foundPairs === 8) {
-                                    modal.setContent(createWinContent(gameState.move, restartGame));
+                                    modal.setContent(createWinContent(gameState.move, () => {
+                                        modal.closeModal();
+                                        restartGame();
+                                    }));
+                                    saveResult(gameState.move);
                                     modal.openModal();
                                     gameState.clickable = false;
                                 }
@@ -149,8 +154,21 @@ const createApp = () => {
         modal.closeModal();
     };
 
+    const formatDate = (iso) => {
+        const d = new Date(iso);
+        const day = String(d.getDate()).padStart(2, '0');
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const year = d.getFullYear();
+        return `${day}.${month}.${year}`;
+    }
+
     buttons[0].addEventListener('click', restartGame);
-    
+
+    buttons[1].addEventListener('click', () => {
+        modal.setContent(createLeaderboardContent(getResults()));
+        modal.openModal();
+    });
+
     const modal = createModal();
 
     function createWinContent(moves, onNewGame) {
@@ -166,9 +184,44 @@ const createApp = () => {
 
         container.append(h2, p, newGameBtn);
 
-
         return container;
     }
-};
 
+    function createLeaderboardContent(results) {
+        const container = document.createElement('div');
+
+        if (results.length === 0) {
+            const empty = document.createElement('p');
+            empty.textContent = 'Пока нет результатов';
+            container.append(empty);
+            return container;
+        }
+
+        const title = document.createElement('h2');
+        title.textContent = 'Таблица лидеров';
+
+        const table = document.createElement('table');
+        table.classList.add('rating-table');
+
+        results.forEach((result, index) => {
+            const row = document.createElement('tr');
+
+            const placeCell = document.createElement('td');
+            placeCell.textContent = index + 1;
+
+            const movesCell = document.createElement('td');
+            movesCell.textContent = result.moves;
+
+            const dateCell = document.createElement('td');
+            dateCell.textContent = formatDate(result.date);
+
+            row.append(placeCell, movesCell, dateCell);
+            table.append(row);
+        });
+
+        container.append(title, table);
+        return container;
+    }
+
+};
 createApp();

@@ -237,4 +237,51 @@ body {
   -webkit-box-shadow: 12px 10px 22px 1px rgba(0, 0, 0, 0.36);
           box-shadow: 12px 10px 22px 1px rgba(0, 0, 0, 0.36);
   cursor: pointer;
+}
+
+.rating-table {
+  width: 100%;
+  min-width: 320px;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 20px auto 0;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: #fffaf5;
+  -webkit-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+.rating-table td {
+  padding: 12px 20px;
+  font-size: 17px;
+  text-align: center;
+  color: #3b3028;
+}
+.rating-table tr {
+  -webkit-transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease;
+}
+.rating-table tr:hover {
+  background-color: #f3e4d6;
+}
+.rating-table tr:first-child {
+  background-color: #c98757;
+  color: #fff;
+}
+.rating-table tr:first-child td {
+  color: #fff;
+  font-weight: 600;
+}
+.rating-table tr + tr td {
+  border-top: 1px solid #eadfd5;
+}
+.rating-table td:first-child {
+  width: 60px;
+  font-weight: 700;
+}
+.rating-table td:nth-child(2) {
+  font-weight: 600;
+}
+.rating-table td:last-child {
+  color: #7a6a5c;
 }/*# sourceMappingURL=style.css.map */
